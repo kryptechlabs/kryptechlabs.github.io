@@ -182,6 +182,9 @@
             el('strong', 'Message sent.'),
             el('p', 'Thanks, ' + data.first_name + '. We’ll reply to ' + data.email + '.')
           ]);
+          // Sent: take the visitor to the Thank You page.
+          var thanks = form.getAttribute('data-thanks');
+          if (thanks) window.location.href = thanks;
         });
       }).catch(notSent).then(function () { sending(false); });
       return;

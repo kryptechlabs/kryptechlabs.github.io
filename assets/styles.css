@@ -23,6 +23,13 @@
   --danger: #a3262c;
   --shadow: 0 22px 44px -24px rgb(20 24 28 / 0.45);
 
+  /* Logo ground: the header and footer use it in both themes */
+  --brand: #14181a;
+  --brand-fg: #ffffff;
+  --brand-muted: #a9b0b2;
+  --brand-line: #30363a;
+  --brand-surface: #1e2326;
+
   /* Type */
   --font-display: "Lato", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   --font-body: "Lato", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
@@ -165,32 +172,33 @@ ul, ol { padding: 0; list-style: none; }
 
 /* ---------- Header ---------- */
 
+.on-brand {
+  background: var(--brand); color: var(--brand-fg);
+  --fg: var(--brand-fg); --muted: var(--brand-muted); --line: var(--brand-line);
+  --bg: var(--brand); --surface: var(--brand-surface);
+}
+
 .site-head {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
-  background: var(--bg); border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 .site-head__in {
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
   gap: 0.5rem 1.5rem; min-height: 4.25rem; padding-block: 0.6rem;
 }
 
-.mark { text-decoration: none; display: inline-flex; flex-direction: column; gap: 0.3rem; }
-.mark__w {
-  font: 300 1rem/1 var(--font-display); letter-spacing: 0.34em; text-transform: uppercase;
-  white-space: nowrap;
-}
-.mark__w b { font-weight: 900; }
-.mark__s { font: 400 0.5625rem/1 var(--font-body); letter-spacing: 0.42em; text-transform: uppercase; color: var(--muted); }
+.mark { display: inline-flex; flex: none; }
+.mark img { height: clamp(1.75rem, 8vw, 2.25rem); width: auto; }
 
 .menu-btn { display: none; }
 
-.nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.75rem; }
+.nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.5rem; }
 .nav a { font-weight: 700; font-size: 0.9375rem; text-decoration: none; padding-block: 0.5rem; }
 .nav a:not(.btn) { border-bottom: 3px solid transparent; }
-.nav a:not(.btn):hover { border-bottom-color: var(--line); }
+.nav a:not(.btn):hover { border-bottom-color: var(--muted); }
 .nav a[aria-current="page"]:not(.btn) { border-bottom-color: var(--accent); }
 
-@media (max-width: 47.99em) {
+@media (max-width: 61.99em) {
   .js .menu-btn { display: inline-flex; }
   .js .nav { display: none; }
   .js .nav.is-open { display: flex; }
@@ -237,6 +245,7 @@ ul, ol { padding: 0; list-style: none; }
 }
 
 .page-hero { padding-block: clamp(2.75rem, 7vw, 5rem) clamp(2.5rem, 6vw, 4rem); }
+.page-hero--compact { padding-block: clamp(2rem, 5vw, 3.25rem) clamp(1rem, 3vw, 1.5rem); }
 
 /* Project update illustration */
 .update {
@@ -364,6 +373,7 @@ a.row:hover .h3 { text-decoration: underline; text-decoration-thickness: 2px; }
 .shot figcaption { font-size: 0.9375rem; line-height: 1.45; color: var(--muted); }
 
 .case { scroll-margin-top: 6rem; }
+.chip.chip--status { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
 .case__head { display: grid; gap: 1.25rem; justify-items: start; }
 .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .chip {
@@ -455,15 +465,16 @@ a.row:hover .h3 { text-decoration: underline; text-decoration-thickness: 2px; }
 @media (min-width: 52em) { .cta { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); } }
 .cta__side { display: grid; gap: 1.25rem; justify-items: start; }
 
-.site-foot { border-top: 1px solid var(--line); padding-block: 2.5rem; font-size: 0.9375rem; }
+.site-foot { padding-block: 2.75rem 2.5rem; font-size: 0.9375rem; }
 .site-foot__in { display: grid; gap: 2rem 3rem; }
 .site-foot__in > * { min-width: 0; }
 @media (min-width: 36em) { .site-foot__in { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 64em) { .site-foot__in { grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.9fr) minmax(0, 0.9fr) minmax(0, 1.2fr); } }
 .site-foot h2 { font: 700 0.75rem/1.4 var(--font-body); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
 .site-foot ul { display: grid; gap: 0.4rem; }
-.site-foot__legal { margin-top: 2.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); }
-.site-foot .mark { margin-bottom: 1rem; }
+.site-foot__legal { margin-top: 2.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); display: grid; gap: 0.35rem; font-size: 0.875rem; }
+.contact-item__addr { font-style: normal; line-height: 1.55; max-width: 26em; }
+.site-foot .mark { margin-bottom: 1.1rem; }
 
 /* ---------- Case study tiles ---------- */
 
@@ -505,6 +516,44 @@ mark.fill {
   background: color-mix(in srgb, var(--accent) 30%, transparent); color: var(--fg);
   outline: 1px dashed var(--fg); padding: 0 0.25em;
 }
+
+/* ---------- Team ---------- */
+
+.members { display: grid; gap: clamp(1.5rem, 3vw, 2.25rem); }
+.member {
+  display: grid; gap: 1.5rem; background: var(--surface); border: 1px solid var(--line);
+  padding: clamp(1.25rem, 3.5vw, 2.25rem); max-width: 54rem;
+}
+.member > * { min-width: 0; }
+.member__head { display: flex; flex-wrap: wrap; gap: 1.25rem 1.5rem; align-items: center; }
+.member__head .person__mono { width: 5.5rem; font-size: 1.9rem; flex: none; }
+.member__id { display: grid; gap: 0.3rem; min-width: 0; }
+.member__links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin-top: 0.3rem; }
+.member__links a { font-weight: 700; }
+.member__cols { display: grid; gap: 1.5rem 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.member__cols .ticks { gap: 0.9rem; }
+.member__cols > div { display: grid; gap: 0.75rem; align-content: start; min-width: 0; }
+@media (min-width: 44em) { .member__cols { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } }
+
+/* ---------- FAQ ---------- */
+
+.faq { display: grid; gap: 2.75rem; max-width: 48rem; }
+.faq__group { display: grid; gap: 0.9rem; }
+.faq__list { border-bottom: 1px solid var(--line); }
+.faq__item { border-top: 1px solid var(--line); }
+.faq__item summary {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem;
+  padding-block: 1.1rem; cursor: pointer; list-style: none;
+  font: 700 1.125rem/1.35 var(--font-body);
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after {
+  content: "+"; flex: none; font: 300 1.6rem/0.8 var(--font-display); color: var(--muted);
+}
+.faq__item[open] summary::after { content: "\2212"; }
+.faq__item summary:hover span { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+.faq__a { padding: 0 2.5rem 1.4rem 0; max-width: 40em; }
+.faq__a a { font-weight: 700; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
