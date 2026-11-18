@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Linguistic case study | KrypTech Labs</title>
-<meta name="description" content="A language app that tells you what you can do today, and what you can't yet.">
-<meta property="og:type" content="website">
+<meta name="description" content="Linguistic is a KrypTech Labs product concept: a language app that tells you what you can do today, and what you can't yet. Built in a one-week discovery sprint.">
+<meta property="og:type" content="article">
 <meta property="og:site_name" content="KrypTech Labs">
-<meta property="og:title" content="Linguistic case study | KrypTech Labs">
-<meta property="og:description" content="A language app that tells you what you can do today, and what you can't yet.">
+<meta property="og:title" content="Linguistic | KrypTech Labs case study">
+<meta property="og:description" content="A language app that measures what you can actually do, not how often you show up.">
+<meta property="og:image" content="https://kryptechlabs.github.io/assets/img/linguistic-state-view.jpg">
 <meta name="theme-color" content="#14181a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-12.9 -94.4 110 110'%3E%3Crect x='-12.9' y='-94.4' width='110' height='110' fill='%2314181A'/%3E%3Cpath fill='%23FFFFFF' d='M21.28 -44.27H25.3Q27.39 -44.27 28.62 -44.79Q29.86 -45.32 30.96 -46.58L57.2 -76.28Q58.41 -77.66 59.53 -78.23Q60.66 -78.81 62.42 -78.81H71.5L41.47 -44.88Q40.31 -43.61 39.29 -42.73Q38.28 -41.85 37.12 -41.30Q38.66 -40.81 39.82 -39.82Q40.97 -38.83 42.24 -37.34L73.59 0.0H64.35Q63.30 0.0 62.59 -0.16Q61.87 -0.33 61.35 -0.60Q60.83 -0.88 60.39 -1.32Q59.95 -1.76 59.51 -2.25L32.28 -33.55Q31.68 -34.21 31.15 -34.67Q30.63 -35.14 29.94 -35.47Q29.26 -35.80 28.35 -35.94Q27.44 -36.08 26.12 -36.08H21.28V0.0H10.67V-78.81H21.28Z'/%3E%3C/svg%3E">
 
@@ -16,6 +17,52 @@
 <link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/styles.css">
 <script>document.documentElement.classList.add('js')</script>
+<style>
+/* Linguistic case study only. Built on the site tokens, so light and dark themes follow automatically. */
+.lx-intro { display: grid; gap: 1.5rem; justify-items: start; }
+.lx-hero-facts { width: 100%; }
+.lx-danger { color: var(--danger); }
+
+/* Can / Shaky / Can't markers: shape and fill, never colour */
+.lx-mk { display: inline-block; width: 0.8rem; height: 0.8rem; border: 2px solid var(--fg); flex: none; }
+.lx-mk--can { background: var(--fg); }
+.lx-mk--shaky { background: linear-gradient(90deg, var(--fg) 0 50%, transparent 50%); }
+.lx-legend { border-bottom: 1px solid var(--line); }
+.lx-legend li {
+  display: grid; grid-template-columns: 0.8rem 4.75rem minmax(0, 1fr); gap: 0 0.9rem;
+  align-items: center; padding-block: 0.8rem; border-top: 1px solid var(--line);
+}
+
+/* Effect sizes over time */
+.lx-curve { display: grid; gap: 1.75rem 2.5rem; }
+@media (min-width: 48em) { .lx-curve { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.lx-curve > div { display: grid; gap: 0.35rem; align-content: start; border-top: 4px solid currentColor; padding-top: 1rem; }
+.lx-curve .mono, .lx-curve .stat__n { color: inherit; }
+.lx-curve strong { font-weight: 700; }
+.lx-up { color: var(--fg); }
+.lx-flat { color: var(--muted); }
+.lx-down { color: var(--danger); }
+
+/* Quotes */
+.lx-quotes { display: grid; gap: 1.5rem; }
+.lx-quote { margin: 0; display: grid; gap: 0.4rem; border-left: 3px solid var(--fg); padding-left: 1.25rem; }
+.lx-quote p { font: 700 clamp(1.25rem, 2.2vw, 1.6rem)/1.3 var(--font-display); }
+.lx-quote cite { font-style: normal; color: var(--muted); font-size: 0.9375rem; }
+.lx-col-head { padding-bottom: 0.75rem; border-bottom: 2px solid var(--fg); margin-bottom: 0.25rem; }
+.lx-col-head.is-muted { border-bottom-color: var(--muted); color: var(--muted); }
+
+/* Screens */
+.lx-solo { max-width: 18rem; width: 100%; }
+.lx-pair .phone { max-width: 17rem; }
+.lx-pair .shot { gap: 1rem; }
+.shot figcaption .h3 { color: var(--fg); }
+.shot figcaption p + p { margin-top: 0.6rem; }
+.lx-cap { display: grid; gap: 0.6rem; justify-items: start; }
+.chip--evidence { border-color: var(--fg); color: var(--fg); }
+.lx-key { display: grid; gap: 0.6rem; }
+.lx-key li { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; font-size: 0.9375rem; }
+.lx-key .chip { min-width: 7.25rem; text-align: center; }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -27,56 +74,253 @@
   </div>
 </header>
 <main id="main">
-<section class="page-hero">
-  <div class="wrap sec">
-    <p class="label">Case study</p>
-    <div class="stack">
-      <a class="back" href="case-studies.html">All case studies</a><div class="chips"><span class="chip">Mobile app</span><span class="chip">Language learning</span></div>
-      <h1 class="display display--xl"><strong>Linguistic</strong></h1>
-      <p class="lead">Know what you can do in a language, and what you can&rsquo;t yet.</p>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <p><a class="back" href="case-studies.html">All case studies</a></p>
+  </div>
+  <div class="wrap hero__grid" style="margin-top:clamp(1.5rem,4vw,2.5rem)">
+    <div class="hero__copy case__head">
+      <div class="chips"><span class="chip chip--status">In-house concept</span><span class="chip">Mobile app</span><span class="chip">Language learning</span></div>
+      <h1 class="display display--lg">Linguistic <strong>Honest progress for language learners.</strong></h1>
+      <p class="lead">A language app that tells you what you can do today, and what you can&rsquo;t yet &mdash; instead of how many days in a row you opened it.</p>
+      <p>Built in a one-week discovery sprint, the same format we <a href="services.html#discovery-sprint">run for clients</a>.</p>
     </div>
-  </div>
-</section>
-
-<section class="band band--tight">
-  <div class="wrap sec">
-    <p class="label">Screens</p>
-    <div class="shots"><figure class="shot"><div class="phone"><img src="assets/img/linguistic-start.jpg" alt="Linguistic opening screen with two actions: set a goal, or I already have an account" width="600" height="1301" loading="lazy" decoding="async"></div><figcaption>The opening screen asks for one thing: a goal.</figcaption></figure><figure class="shot"><div class="phone"><img src="assets/img/linguistic-goal.jpg" alt="Goal screen with Goethe-Zertifikat B1 and March 2027 selected, followed by a list of situations the learner needs to handle unassisted" width="600" height="1314" loading="lazy" decoding="async"></div><figcaption>An exam and a sitting date become 12 situations to handle unassisted.</figcaption></figure><figure class="shot"><div class="phone"><img src="assets/img/linguistic-status.jpg" alt="Status screen reading: right now you can handle 4 of 12 situations unassisted, with the four listed" width="600" height="713" loading="lazy" decoding="async"></div><figcaption>Progress is one sentence, followed by the list behind it.</figcaption></figure></div>
-  </div>
-</section>
-
-<section class="band band--rule">
-  <div class="wrap sec">
-    <p class="label">Design decisions</p>
-    <div class="sec__body">
-      <h2 class="display display--md">Design decisions <strong>you can see in the screens.</strong></h2>
-      <div class="rows"><div class="row"><h3 class="h3">It starts with a deadline</h3><p>The first question is what you need to be able to do, and by when. You pick an external standard, such as Goethe-Zertifikat B1, and the sitting you are aiming for.</p></div><div class="row"><h3 class="h3">A standard becomes situations</h3><p>The exam level is translated into real situations you will need to handle unassisted: ordering food and handling an unexpected follow-up, changing a ticket at the counter, explaining a problem to a doctor or landlord.</p></div><div class="row"><h3 class="h3">Progress in plain words</h3><p>The status screen says it in a sentence: right now you can handle 4 of 12 situations unassisted. The list underneath shows exactly which ones.</p></div></div>
+    <div class="stage">
+      <div class="phone"><img src="assets/img/linguistic-start.jpg" alt="Linguistic opening screen with the line: know what you can do in a language, and what you can't yet" width="600" height="1301" decoding="async"></div>
+      <div class="phone"><img src="assets/img/linguistic-goal.jpg" alt="Linguistic goal screen asking what you need to be able to do, and by when" width="600" height="1314" decoding="async"></div>
     </div>
   </div>
 </section>
 
 <section class="band band--tight band--rule">
   <div class="wrap sec">
-    <p class="label">Next case study</p>
-    <div class="rows">
-      <a class="row" href="case-study-family-asset-tracker.html"><h2 class="h3">Family Asset Tracker</h2><p class="muted">Everything a family owns, on one page: gold, land, deposits, shares and policies.</p></a>
+    <p class="label">At a glance</p>
+    <dl class="facts lx-hero-facts">
+      <div><dt>Type</dt><dd>In-house product concept</dd></div>
+      <div><dt>Our role</dt><dd>UX research, product strategy and UX design</dd></div>
+      <div><dt>Timeline</dt><dd>One-week discovery sprint</dd></div>
+      <div><dt>Research</dt><dd>Six learner accounts and eight research papers</dd></div>
+      <div><dt>Status</dt><dd>Concept, not built</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- Problem -->
+<section class="band band--rule">
+  <div class="wrap sec">
+    <p class="label">The problem</p>
+    <div class="sec__body">
+      <h2 class="display display--lg">1,500 days. Three languages. <strong>No conversation.</strong></h2>
+      <div class="prose">
+        <p>This project started with our founder&rsquo;s own learning record: six months of French, a year of German, then Dutch, on one unbroken streak. Each switch restarted the actual learning. The streak never restarted, because it never measured the language. It measured attendance.</p>
+      </div>
+      <div class="stats">
+        <p class="stat"><span class="stat__n">1,500+</span><span class="label">Days in a row</span></p>
+        <p class="stat"><span class="stat__n">3</span><span class="label">Languages</span></p>
+        <p class="stat"><span class="stat__n">200+</span><span class="label">Days under two minutes</span></p>
+        <p class="stat"><span class="stat__n lx-danger">0</span><span class="label">Conversations</span></p>
+      </div>
+      <blockquote class="lx-quote">
+        <p>&ldquo;If I cannot track the effort, then what was the effort for?&rdquo;</p>
+        <cite>Our founder, after a 450+ day streak reset to zero following a short break</cite>
+      </blockquote>
+      <div class="prose">
+        <p>The streak isn&rsquo;t the problem. It works as accountability while there&rsquo;s a real reason to learn: a master&rsquo;s place, a job abroad, an exam date. The problem starts when that reason disappears.</p>
+        <p>A.R.&rsquo;s move to France didn&rsquo;t happen and his French faded unrecorded. D.T. had a certification goal the app had nowhere to store. A.S. kept opening the app after losing interest in the language. In every case the product kept counting, and noticed nothing.</p>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- Research -->
+<section class="band band--rule">
+  <div class="wrap sec">
+    <p class="label">The research</p>
+    <div class="sec__body">
+      <h2 class="display display--lg">Rewards work at first. <strong>Then they backfire.</strong></h2>
+      <div class="lx-curve">
+        <div class="lx-up"><span class="mono">Under a week</span><span class="stat__n">+1.57</span><strong>Large positive effect</strong></div>
+        <div class="lx-flat"><span class="mono">Up to 20 weeks</span><span class="stat__n">+0.30</span><strong>Small positive effect</strong></div>
+        <div class="lx-down"><span class="mono">Across years</span><span class="stat__n">&minus;0.20</span><strong>Negative effect</strong></div>
+      </div>
+      <p class="fit">These are effect sizes from a meta-analysis of gamified learning (Kim &amp; Castelli, 2021): the gap between learners who got points, streaks and badges and learners who didn&rsquo;t. Over years, the gamified group did worse. The studies differ in length, so this shows a pattern rather than proof.</p>
+      <div class="prose">
+        <p>Two more studies explain why. Points, levels and leaderboards raised how much people did without changing how competent they became (Mekler et al., 2017). A 2024 meta-analysis found the same split: learners felt more motivated and more capable, with minimal effect on actual competency (Liuyufeng et al., 2024).</p>
+      </div>
+      <details class="faq__item">
+        <summary><span>Sources</span></summary>
+        <div class="faq__a">
+          <ul class="bullets">
+            <li>Kim &amp; Castelli (2021). Effects of gamification on behavioral change in education. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8037535" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></li>
+            <li>Mekler, Br&uuml;hlmann, Tuch &amp; Opwis (2017). Effects of individual gamification elements on intrinsic motivation and performance. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0747563215301229" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></li>
+            <li>Liuyufeng et al. (2024). Gamification enhances student intrinsic motivation, but minimal impact on competency. <a href="https://link.springer.com/article/10.1007/s11423-023-10337-7" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></li>
+            <li>Peters, Calvo &amp; Ryan (2018). Designing for motivation, engagement and wellbeing in digital experience. <a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2018.00797/full" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></li>
+            <li>Bjork &amp; Bjork (2011). Making things hard on yourself, but in a good way. <a href="https://bjorklab.psych.ucla.edu/wp-content/uploads/sites/13/2016/04/EBjork_RBjork_2011.pdf" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></li>
+            <li>Kluger &amp; DeNisi (1996). The effects of feedback interventions on performance. <a href="https://doi.org/10.1037/0033-2909.119.2.254" target="_blank" rel="noopener">Read the paper<span class="vh"> (opens in a new tab)</span></a></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Learners -->
 <section class="band band--ink">
   <div class="wrap sec">
-    <p class="label">Get in touch</p>
+    <p class="label">What learners said</p>
+    <div class="sec__body">
+      <h2 class="display display--lg">The ones who could speak <strong>never answered with a number.</strong></h2>
+      <p class="lead">We asked learners what they could do in the language. Those who never reached conversation answered in time. Those who did answered in situations.</p>
+      <div class="split">
+        <div class="lx-quotes">
+          <h3 class="h3 lx-col-head is-muted">Answered in time</h3>
+          <blockquote class="lx-quote"><p>&ldquo;1,500 days.&rdquo;</p><cite>Our founder: app only, three languages, no conversation</cite></blockquote>
+          <blockquote class="lx-quote"><p>&ldquo;500+ day streak.&rdquo;</p><cite>A.S.: kept the streak after losing interest</cite></blockquote>
+        </div>
+        <div class="lx-quotes">
+          <h3 class="h3 lx-col-head">Answered in situations</h3>
+          <blockquote class="lx-quote"><p>&ldquo;Simple questions yes, complex questions no.&rdquo;</p><cite>A.R.: classroom, reached conversation in six months</cite></blockquote>
+          <blockquote class="lx-quote"><p>&ldquo;I can ask for what I need without things getting complicated.&rdquo;</p><cite>S.P.: classroom and daily use, fluent across a decade</cite></blockquote>
+        </div>
+      </div>
+      <p class="muted">No app in the study ever asked the question that produces the second kind of answer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Idea -->
+<section class="band">
+  <div class="wrap sec">
+    <p class="label">The idea</p>
+    <div class="sec__body">
+      <h2 class="display display--lg">Progress you can see, <strong>and can lose.</strong></h2>
+      <div class="split">
+        <div class="stack">
+          <p>Linguistic replaces the streak with twelve real situations, chosen from the goal the learner sets: an exam, a move, a job. Each situation has a state, and the state moves in both directions.</p>
+          <ul class="lx-legend" style="width:100%">
+            <li><span class="lx-mk lx-mk--can" aria-hidden="true"></span><strong>Can</strong><span>Handled unassisted, recently</span></li>
+            <li><span class="lx-mk lx-mk--shaky" aria-hidden="true"></span><strong>Shaky</strong><span>Handled with gaps, or not tested lately</span></li>
+            <li><span class="lx-mk" aria-hidden="true"></span><strong>Can&rsquo;t</strong><span>Not yet handled unassisted</span></li>
+          </ul>
+          <p>A score that drops from 74 to 61 tells you nothing. &ldquo;Phone calls moved from Can to Shaky&rdquo; tells you exactly what to practise. The markers use shape and fill, not colour, so they work for colour-blind users and on paper.</p>
+          <ul class="lx-key">
+            <li><span class="chip chip--evidence">Evidenced</span><span class="muted">A learner&rsquo;s account produced the requirement</span></li>
+            <li><span class="chip">Proposed</span><span class="muted">Our design judgement, still to be tested</span></li>
+          </ul>
+        </div>
+        <figure class="shot lx-solo">
+          <div class="phone"><img src="assets/img/linguistic-state-view.jpg" width="600" height="1311" loading="lazy" decoding="async" alt="Progress screen. Headline: Right now you can handle 4 of 12 situations unassisted. Four situations are marked Can and five Shaky. Make a phone call is marked Shaky, with the note: moved from Can, 2 weeks ago. No streak, score or level is shown."></div>
+          <figcaption>The progress screen. No streak, percentage, level or points.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Screens -->
+<section class="band band--rule">
+  <div class="wrap sec">
+    <p class="label">Key screens</p>
+    <div class="sec__body">
+      <h2 class="display display--lg">Three moments <strong>most apps avoid.</strong></h2>
+      <div class="shots">
+        <figure class="shot">
+          <div class="phone"><img src="assets/img/linguistic-session.jpg" width="600" height="1311" loading="lazy" decoding="async" alt="Practice screen. Prompt: You're at a pharmacy. You need something for a headache. Speaker: Marta, 34, Munich, normal speed. The middle shows only an audio waveform and Play again. Below: Hold to reply, and I don't know how to say this. No text, word bank or answer options."></div>
+          <figcaption class="lx-cap">
+            <span class="chip chip--evidence">Evidenced</span>
+            <h3 class="h3">A session with nothing to copy</h3>
+            <p>A named speaker at normal speed, and no transcript, word bank or answer tiles. Tiles train recognition, which breaks the moment a real speaker goes off script. A.R. was conversational in class in Chennai and struggled with native accents in France; this screen is built around that gap.</p>
+          </figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="phone"><img src="assets/img/linguistic-plateau.jpg" width="600" height="1309" loading="lazy" decoding="async" alt="Plateau screen. Headline: Nothing has changed in 8 weeks. You've practised 34 times; your 12 situations are where they were in June. Question: Has something changed about why you're learning? Answers: My goal changed; I've been maintaining, not learning; Nothing's changed, I want to push harder."></div>
+          <figcaption class="lx-cap">
+            <span class="chip chip--evidence">Evidenced</span>
+            <h3 class="h3">Noticing a plateau</h3>
+            <p>Thirty-four sessions, and nothing has moved since June. Instead of celebrating the activity, Linguistic asks whether the reason for learning has changed. &ldquo;I&rsquo;ve been maintaining, not learning&rdquo; is a perfectly acceptable answer, and there&rsquo;s no retention prompt.</p>
+          </figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="phone"><img src="assets/img/linguistic-re-entry.jpg" width="600" height="1311" loading="lazy" decoding="async" alt="Return screen. Headline: Welcome back. It's been 14 months. Where you were: 7 of 12 situations, Can. What's likely gone stale: 4 situations flagged, estimated, not tested. What's probably held: 3 situations. Buttons: Check where you actually are, and Just start practising."></div>
+          <figcaption class="lx-cap">
+            <span class="chip chip--evidence">Evidenced</span>
+            <h3 class="h3">Coming back after a break</h3>
+            <p>After 14 months away, the learner sees what has probably gone stale, marked &ldquo;estimated, not tested&rdquo;. No reset to zero, no streak repair, no guilt. S.P. took a multi-year break in German and came back at a higher level.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Honest vs cushioned -->
+<section class="band band--rule">
+  <div class="wrap sec">
+    <p class="label">A decision</p>
+    <div class="sec__body">
+      <h2 class="display display--lg">Telling someone they&rsquo;ve slipped. <strong>Two ways.</strong></h2>
+      <p class="lead">The hardest screen in an honest product is the one that reports a drop. We designed it twice and show both, because choosing between them is a real trade-off.</p>
+      <div class="split lx-pair">
+        <figure class="shot">
+          <div class="phone"><img src="assets/img/linguistic-decrease-honest.jpg" width="600" height="1311" loading="lazy" decoding="async" alt="Honest version. Making a phone call, Can to Shaky, last successful attempt 6 weeks ago. Text: You handled the booking, but not the change of time. Unscripted turns are where this one slips. Two equal buttons: Try it again now, and Leave it for later."></div>
+          <figcaption class="lx-cap">
+            <span class="chip chip--evidence">Evidenced</span>
+            <h3 class="h3">Honest</h3>
+            <p>It says what slipped and why, then offers two equal choices. Research on feedback (Kluger &amp; DeNisi) shows comments aimed at the person lower performance, while comments about the task don&rsquo;t.</p>
+          </figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="phone"><img src="assets/img/linguistic-decrease-cushioned.jpg" width="600" height="1311" loading="lazy" decoding="async" alt="Cushioned version of the same screen. Adds: Don't worry, this happens to everyone, and You've come a long way with this one. Primary button: Let's fix it now. Secondary text link: Maybe later."></div>
+          <figcaption class="lx-cap">
+            <span class="chip">Proposed</span>
+            <h3 class="h3">Cushioned</h3>
+            <p>Reassurance first and a loud &ldquo;Let&rsquo;s fix it now&rdquo;. It will feel better in the moment and test better on sentiment. It also makes putting things off the quiet default again, the pattern the product exists to avoid.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Next -->
+<section class="band band--rule">
+  <div class="wrap sec">
+    <p class="label">What&rsquo;s next</p>
+    <div class="sec__body">
+      <h2 class="display display--lg">A concept, <strong>and what it would take to build.</strong></h2>
+      <div class="trio">
+        <div><h3 class="h3">The open problem</h3><p>The app has to know what a learner can really do, and asking them isn&rsquo;t reliable. It needs to judge spoken attempts. That part is specified, not built.</p></div>
+        <div><h3 class="h3">How we&rsquo;d test it</h3><p>Twelve weeks against a standard gamified app, measuring what learners can do unprompted, not sessions completed.</p></div>
+        <div><h3 class="h3">What would prove us wrong</h3><p>If learners who see an honest drop quit instead of practising, honesty is making the product worse, and the design has to change.</p></div>
+      </div>
+      <p class="muted">How we researched it: six learner accounts (two classroom learners and four app users, including our founder&rsquo;s own record) and desk research across eight papers. Learners&rsquo; self-rated ability was not independently tested.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="band band--ink">
+  <div class="wrap sec">
+    <p class="label">Your product</p>
     <div class="cta">
-      <h2 class="display display--lg">Have an idea? <strong>Let&rsquo;s talk.</strong></h2>
+      <h2 class="display display--lg">Is your product measuring <strong>attendance too?</strong></h2>
       <div class="cta__side">
-        <p>Book a 30-minute call and tell us what you&rsquo;re trying to build. Prefer to write first? Send us a message.</p>
+        <p>Logins, sessions, streaks and active seats can all look healthy while people get nothing done. In a one-week discovery sprint we find the outcome your users came for, check whether anything you measure tracks it, and design the screens that do.</p>
         <div class="btn-row">
-          <a class="btn btn--primary" href="https://cal.com/kryptech-labs/30min?user=kryptech-labs&amp;overlayCalendar=true" target="_blank" rel="noopener">Start a project<span class="vh"> (books a 30-minute call, opens in a new tab)</span></a>
-          <a class="btn" href="contact.html">Send us a message</a>
+          <a class="btn btn--primary" href="https://cal.com/kryptech-labs/30min?user=kryptech-labs&amp;overlayCalendar=true" target="_blank" rel="noopener">Book a discovery sprint<span class="vh"> (books a 30-minute call, opens in a new tab)</span></a>
+          <a class="btn" href="services.html#discovery-sprint">How the sprint works</a>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="band band--tight">
+  <div class="wrap sec">
+    <p class="label">More work</p>
+    <p><a class="arrow-link" href="case-study-family-asset-tracker.html">Family Asset Tracker</a></p>
   </div>
 </section>
 </main>
