@@ -373,6 +373,8 @@ a.row:hover .h3 { text-decoration: underline; text-decoration-thickness: 2px; }
 .shot figcaption { font-size: 0.9375rem; line-height: 1.45; color: var(--muted); }
 
 .case { scroll-margin-top: 6rem; }
+section[id] { scroll-margin-top: 5.5rem; }
+.links-row { display: flex; flex-wrap: wrap; gap: 0.75rem 2rem; }
 .chip.chip--status { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
 .case__head { display: grid; gap: 1.25rem; justify-items: start; }
 .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
